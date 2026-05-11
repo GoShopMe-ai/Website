@@ -869,7 +869,8 @@ footer { background: var(--lavender-bg); padding: 48px 0 20px; }
 }
 
 /* Remove inner scrollbar when embedded in iframe */
-html { overflow-x: hidden; }
+html { overflow-x: hidden; overflow-y: hidden; }
+body { overflow-y: auto; }
 
 
 /* Fix gap below footer */
@@ -1310,7 +1311,7 @@ body { min-height: unset; }
     <div class="section-label" style="text-align:center; color: var(--orange);">For brands</div>
     <h3>Are you a fashion brand?</h3>
     <p>GoShopMe puts your products in front of shoppers at the exact moment they're ready to buy. No ads, no algorithms to game.</p>
-    <a href="#waitlist" class="btn-outline-w">Learn how to list your brand &rarr;</a>
+    <a href="#" onclick="window.top.location.href='https://www.goshopme.ai/brands#brand-register'" class="btn-outline-w">Learn how to list your brand &rarr;</a>
   </div>
 </section>
 
@@ -1462,16 +1463,20 @@ document.querySelectorAll('a[href="#waitlist"], button[data-target="waitlist"]')
 
 
 <script>
-// Send page height to parent (Wix) so iframe resizes to full content height
+// Send page height to parent (Wix) so iframe resizes — videos need extra time
 function sendHeight() {
-  var height = document.documentElement.scrollHeight || document.body.scrollHeight;
+  var height = Math.max(
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight,
+    document.body.scrollHeight,
+    document.body.offsetHeight
+  );
   window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
 }
 window.addEventListener('load', sendHeight);
 window.addEventListener('resize', sendHeight);
-// Also send after images/videos load
-setTimeout(sendHeight, 500);
-setTimeout(sendHeight, 1500);
+// Videos in this page take time to load — send multiple times
+[500, 1000, 2000, 3000, 5000].forEach(function(t) { setTimeout(sendHeight, t); });
 </script>
 
 </body>
