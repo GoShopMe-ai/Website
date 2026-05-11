@@ -523,8 +523,8 @@ nav {
 }
 .waitlist-sub { font-size: 15px; color: var(--gray-600); margin-bottom: 28px; }
 .waitlist-form-row {
-  display: flex; gap: 8px; justify-content: center;
-  max-width: 520px; margin: 0 auto 10px; flex-wrap: wrap;
+  display: flex; gap: 8px; justify-content: center; align-items: stretch;
+  max-width: 740px; margin: 0 auto 10px; flex-wrap: nowrap;
 }
 .waitlist-form-row input {
   flex: 1; min-width: 160px; padding: 14px 18px;
@@ -533,6 +533,14 @@ nav {
   outline: none; transition: border-color 0.2s;
 }
 .waitlist-form-row input:focus { border-color: var(--orange); }
+.waitlist-form-row .btn-cta {
+  flex-shrink: 0;
+  white-space: nowrap;
+  align-self: stretch;
+  height: auto;
+}
+#wlEmail { flex: 2; min-width: 200px; }
+#wlFirstName { flex: 1.2; }
 .waitlist-micro { font-size: 12px; color: var(--gray-400); }
 
 /* ============================================
@@ -730,13 +738,11 @@ footer { background: var(--lavender-bg); padding: 48px 0 20px; }
   .why-grid { grid-template-columns: 1fr; gap: 24px; }
   .why-cta-box { text-align: left; }
 
-  /* Waitlist */
+  /* Waitlist - keep inline on tablet, stack on mobile */
   .waitlist-form-row {
-    flex-direction: column;
-    align-items: stretch;
+    max-width: 680px;
+    flex-wrap: nowrap;
   }
-  .waitlist-form-row input { width: 100%; }
-  .waitlist-form-row button { width: 100%; justify-content: center; }
 
   /* Footer */
   .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -1062,7 +1068,7 @@ footer { background: var(--lavender-bg); padding: 48px 0 20px; }
         <div class="proof-desc">Shoppers from 40+ countries ready for a new way to shop.</div>
       </div>
       <div class="proof-card">
-        <div class="proof-number">5</div>
+        <div class="proof-number">35</div>
         <div class="proof-label">Beta testers</div>
         <div class="proof-desc">Real women across 5 countries testing ShAI before launch.</div>
       </div>
@@ -1303,7 +1309,7 @@ async function submitWaitlist() {
 
     if (res.ok) {
       document.getElementById('waitlistForm').style.display = 'none';
-      msg.textContent = '🎉 You're in! Check your inbox for a confirmation from us.';
+      msg.textContent = "🎉 You're in! Check your inbox for a confirmation from us.";
       msg.style.color = 'var(--lavender)';
       msg.style.fontSize = '16px';
       msg.style.fontWeight = '600';
@@ -1337,6 +1343,12 @@ async function submitWaitlist() {
           </a>
           <a href="https://www.youtube.com/@goshopmeai" aria-label="YouTube">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.4 19.6C5.12 20 12 20 12 20s6.88 0 8.6-.46a2.78 2.78 0 001.94-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@nora.g.todorova?_r=1&_t=ZN-96FTiNNuGEY" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1DwWxcmj8P/" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           </a>
         </div>
       </div>
