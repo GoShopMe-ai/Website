@@ -1146,6 +1146,17 @@ async function submitAboutForm() {
 
 
 <script>
+function openMobileMenu() {
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow = '';
+}
+</script>
+
+<script>
 function sendHeight() {
   var height = Math.max(
     document.documentElement.scrollHeight,
