@@ -896,6 +896,11 @@ html, body { margin: 0; padding: 0; }
   #wlEmail { flex: unset !important; }
   #wlFirstName { flex: unset !important; }
 }
+
+/* Hide iframe scrollbar visually on all browsers — scroll still works on mobile */
+html::-webkit-scrollbar { display: none; }
+html { -ms-overflow-style: none; scrollbar-width: none; }
+
 </style>
 </head>
 <body>
@@ -1440,39 +1445,14 @@ async function submitWaitlist() {
 </footer>
 
 
-<script>
-function openMobileMenu() {
-  document.getElementById('mobileMenu').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.body.style.overflow = '';
-}
-// Smooth scroll for all #waitlist links
-document.querySelectorAll('a[href="#waitlist"], button[data-target="waitlist"]').forEach(function(el) {
-  el.addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('waitlist').scrollIntoView({behavior: 'smooth'});
-  });
-});
-</script>
+
+
 
 
 
 
 
 <script>
-// If loaded inside Wix iframe: disable body scroll so only Wix page scrolls
-// If loaded directly: normal scroll preserved
-(function() {
-  if (window.self !== window.top) {
-    // We're inside an iframe — disable our own scrollbar
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-  }
-})();
-
 function sendHeight() {
   var height = Math.max(
     document.documentElement.scrollHeight,
@@ -1480,26 +1460,20 @@ function sendHeight() {
     document.body.scrollHeight,
     document.body.offsetHeight
   );
-  if (window.self !== window.top) {
-    window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
-    // Set our document to exact content height so no inner scroll needed
-    document.documentElement.style.height = height + 'px';
-    document.body.style.height = height + 'px';
-  }
+  window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
 }
 window.addEventListener('load', function() {
   sendHeight();
   if (window.ResizeObserver) {
     new ResizeObserver(sendHeight).observe(document.body);
   }
-  // Fire again when videos report their size (videos inflate page height)
   document.querySelectorAll('video').forEach(function(v) {
     v.addEventListener('loadeddata', sendHeight);
     v.addEventListener('canplay', sendHeight);
   });
 });
 window.addEventListener('resize', sendHeight);
-[300, 800, 1500, 3000].forEach(function(t) { setTimeout(sendHeight, t); });
+[500, 1000, 2000, 3500, 6000].forEach(function(t) { setTimeout(sendHeight, t); });
 </script>
 </body>
 </html>
