@@ -904,8 +904,8 @@ footer { background: var(--lavender-bg); padding: 48px 0 20px; }
 }
 
 
-/* Remove inner scrollbar when embedded in iframe */
-html { overflow-x: hidden; }
+/* Prevent double scrollbar in iframe */
+html { overflow: hidden; height: auto; }
 
 
 /* Fix gap below footer */
@@ -915,7 +915,6 @@ footer { margin-top: auto; }
 
 
 html, body { margin: 0; padding: 0; }
-body { min-height: unset; }
 
 @media (max-width: 600px) {
   .waitlist-form-row {
