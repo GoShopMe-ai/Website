@@ -1160,11 +1160,14 @@ function sendHeight() {
     document.body.scrollHeight,
     document.body.offsetHeight
   );
+  // Tell parent (Wix) how tall we are so it resizes the iframe
   window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
+  // Also set our own height explicitly so Wix iframe has no reason to show inner scroll
+  document.documentElement.style.height = height + 'px';
 }
 window.addEventListener('load', sendHeight);
 window.addEventListener('resize', sendHeight);
-[300, 800, 1500].forEach(function(t) { setTimeout(sendHeight, t); });
+[300, 800, 1500, 3000].forEach(function(t) { setTimeout(sendHeight, t); });
 </script>
 
 </body>

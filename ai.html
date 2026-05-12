@@ -1059,8 +1059,14 @@ document.querySelectorAll('a[href="#waitlist"], button[data-target="waitlist"]')
 </script>
 <script>
 function sendHeight() {
-  var height = document.documentElement.scrollHeight || document.body.scrollHeight;
+  var height = Math.max(
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight,
+    document.body.scrollHeight,
+    document.body.offsetHeight
+  );
   window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
+  document.documentElement.style.height = height + 'px';
 }
 window.addEventListener('load', sendHeight);
 window.addEventListener('resize', sendHeight);

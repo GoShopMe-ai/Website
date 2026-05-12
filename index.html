@@ -1469,6 +1469,7 @@ function sendHeight() {
     document.body.offsetHeight
   );
   window.parent.postMessage({ type: 'iframeHeight', height: height }, '*');
+  document.documentElement.style.height = height + 'px';
 }
 window.addEventListener('load', sendHeight);
 window.addEventListener('resize', sendHeight);
