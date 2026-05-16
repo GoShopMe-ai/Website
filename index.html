@@ -179,6 +179,7 @@ nav {
 .hero-video-wrapper {
   position: relative;
   width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,15 +187,13 @@ nav {
 
 .hero-video-wrapper video {
   width: 100%;
-  border-radius: 16px;
-}
-
-.hero-video-wrapper {
-  position: relative;
-  width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
 }
-.phone-mockup-screen { overflow: visible !important; }
+/* Hero only: allow unmute control to sit above frame */
+.hero .hero-phone .phone-mockup-screen { overflow: visible !important; }
 .video-play-btn {
   position: absolute;
   bottom: 12px;
@@ -368,7 +367,7 @@ nav {
 }
 .returns-visual {
   display: flex; align-items: center; justify-content: center;
-  overflow: visible;
+  overflow: hidden;
 }
 .returns-content h2 {
   font-family: 'Cormorant Garamond', serif;
@@ -661,12 +660,34 @@ footer { background: var(--lavender-bg); padding: 48px 0 20px; }
   border-radius: 22px;
   background: #fff;
   overflow: hidden;
+  position: relative;
 }
 .card-phone .phone-mockup-screen > video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover; display: block;
 }
+
+/* Mockup section videos — inside phone frames (not hero) */
+.how-section .card-phone .phone-mockup-screen,
+.elevate-section .hero-phone .phone-mockup-screen,
+.returns-section .hero-phone .phone-mockup-screen {
+  position: relative;
+  overflow: hidden;
+}
+.how-section .card-phone .phone-mockup-screen > video,
+.elevate-section .hero-phone .phone-mockup-screen > video,
+.returns-section .hero-phone .phone-mockup-screen > video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
 
 
 /* ── Phone mockup ── */
