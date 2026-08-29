@@ -240,6 +240,23 @@ nav {
   font-size: 22px; font-weight: 700; margin-bottom: 8px;
 }
 .how-card-body p { font-size: 13px; line-height: 1.65; color: var(--gray-600); }
+.how-card--linked { position: relative; cursor: pointer; }
+.how-card-cta {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--orange);
+  text-decoration: none;
+}
+.how-card-cta:hover { text-decoration: underline; }
+.how-card--linked .how-card-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
 
 /* ============================================
    ELEVATE — salmon/orange section
@@ -1014,7 +1031,7 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
     <h2>How GoShopMe Works</h2>
     <div class="how-grid">
 
-      <div class="how-card">
+      <div class="how-card how-card--linked">
         <div class="how-card-visual">
           <div class="how-card-step">1</div>
           <div class="phone-mockup card-phone">
@@ -1029,6 +1046,7 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
         <div class="how-card-body">
           <h3>Turn Inspiration into Buyable Options</h3>
           <p>See something you love? Upload a photo or video from social media or your camera. ShAI finds the closest matches — personalised to your size, preferences, and the best price.</p>
+          <a class="how-card-cta" href="https://www.goshopme.ai/find-clothes-from-photo-video" target="_top">Find clothes from a photo or video →</a>
         </div>
       </div>
 
@@ -1459,6 +1477,7 @@ async function submitWaitlist() {
       <div class="footer-col">
         <h4>Product</h4>
         <a href="#" onclick="window.top.location.href='https://www.goshopme.ai/ai'">GoShopMe — AI Personal Shopper App</a>
+        <a href="https://www.goshopme.ai/find-clothes-from-photo-video" target="_top">Find Clothes From a Photo or Video</a>
       </div>
     </div>
     <div class="footer-bottom">
