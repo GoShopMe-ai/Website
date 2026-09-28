@@ -914,6 +914,40 @@ html, body { margin: 0; padding: 0; }
   #wlFirstName { flex: unset !important; }
 }
 
+/* ============================================
+   WAITLIST FORM v2
+   ============================================ */
+.wl2-form { max-width: 740px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; }
+.wl2-full { grid-column: 1 / -1; }
+.wl2-form input[type=text], .wl2-form input[type=email], .wl2-form select {
+  width: 100%; box-sizing: border-box; padding: 14px 18px;
+  border: 1.5px solid var(--lavender-light); border-radius: 6px;
+  font-size: 14px; font-family: inherit; color: var(--black); background: white;
+  outline: none; transition: border-color 0.2s; -webkit-appearance: none; appearance: none;
+}
+.wl2-form select {
+  cursor: pointer; padding-right: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236d6d64' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 16px center;
+}
+.wl2-form select:invalid, .wl2-form select.wl2-empty { color: var(--gray-400); }
+.wl2-form select option { color: var(--black); }
+.wl2-form input::placeholder { color: var(--gray-400); }
+.wl2-form input:focus, .wl2-form select:focus { border-color: var(--orange); }
+.wl2-form .wl2-err { border-color: var(--orange) !important; }
+.wl2-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--gray-600); line-height: 1.45; cursor: pointer; padding: 4px 2px; }
+.wl2-consent input { width: 17px; height: 17px; margin: 1px 0 0; accent-color: var(--lavender); flex-shrink: 0; cursor: pointer; }
+.wl2-form .btn-cta { justify-self: center; margin-top: 6px; }
+.wl2-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.wl2-msg { font-size: 13px; color: var(--orange); text-align: center; min-height: 18px; margin: 0; }
+.wl2-done { display: none; max-width: 560px; margin: 0 auto; padding: 32px 24px; background: white; border-radius: 12px; }
+.wl2-done h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; margin: 0 0 8px; }
+.wl2-done p { color: var(--gray-600); font-size: 15px; margin: 0; }
+@media (max-width: 600px) {
+  .wl2-form { grid-template-columns: 1fr; max-width: 400px; }
+  .wl2-form .btn-cta { width: 100%; justify-content: space-between; box-sizing: border-box; }
+}
+
 /* Hide iframe scrollbar visually on all browsers — scroll still works on mobile */
 html::-webkit-scrollbar { display: none; }
 html { -ms-overflow-style: none; scrollbar-width: none; }
@@ -991,7 +1025,7 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
       </div>
     </div>
     <div class="hero-content">
-      <div class="hero-proof">Over 15,000+ signed up for the beta</div>
+      <div class="hero-proof">Now in private beta</div>
       <h1>Stop scrolling.<br>Start chatting.<br>Meet <span class="accent">ShAI.</span></h1>
       <p class="hero-sub">Your AI personal shopper. From inspiration to purchase, all in one chat. No endless scrolling. No outdated filters.</p>
       <a href="#waitlist" class="btn-cta" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'});window.parent.postMessage({type:'scrollTo',target:'waitlist'},'*');return false;">
@@ -1338,7 +1372,7 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
       </div>
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-q">When is GoShopMe launching? <span class="faq-q-icon">+</span></div>
-        <div class="faq-a">GoShopMe is in pre-launch. Over 15,000 shoppers are already on the waitlist. Join to get early access when we go live.</div>
+        <div class="faq-a">GoShopMe is in pre-launch and currently in private beta. Join the waitlist to get early access when we go live.</div>
       </div>
       <div class="faq-item" onclick="this.classList.toggle('open')">
         <div class="faq-q">Is GoShopMe free? <span class="faq-q-icon">+</span></div>
@@ -1361,70 +1395,128 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
 <!-- WAITLIST -->
 <section class="waitlist-section" id="waitlist">
   <div class="container">
-    <h2>Join 15,000+ early shoppers</h2>
-    <p class="waitlist-sub">Get early access when we launch. Two fields, ten seconds.</p>
-    <div class="waitlist-form-row" id="waitlistForm">
-      <input type="text" id="wlFirstName" placeholder="First name" autocomplete="given-name">
-      <input type="email" id="wlEmail" placeholder="Email address" autocomplete="email">
-      <button class="btn-cta" type="button" id="wlSubmitBtn" onclick="submitWaitlist()">
+    <h2>Be first to shop with ShAI</h2>
+    <p class="waitlist-sub">Join the waitlist and get early access when GoShopMe launches.</p>
+
+    <form class="wl2-form" id="waitlistForm" novalidate>
+      <input type="text" id="wlFirstName" name="firstName" placeholder="First name" autocomplete="given-name" required>
+      <input type="text" id="wlLastName" name="lastName" placeholder="Last name" autocomplete="family-name" required>
+      <input type="email" id="wlEmail" class="wl2-full" name="email" placeholder="Email address" autocomplete="email" required>
+      <select id="wlCountry" name="country" required aria-label="Where do you shop from?">
+        <option value="" disabled selected>Where do you shop from?</option>
+        <option>United Kingdom</option><option>France</option><option>Germany</option><option>Italy</option><option>Spain</option><option>United States</option><option disabled>──────────</option><option>Afghanistan</option><option>Albania</option><option>Algeria</option><option>American Samoa</option><option>Andorra</option><option>Angola</option><option>Anguilla</option><option>Antigua and Barbuda</option><option>Argentina</option><option>Armenia</option><option>Aruba</option><option>Australia</option><option>Austria</option><option>Azerbaijan</option><option>Bahamas</option><option>Bahrain</option><option>Bangladesh</option><option>Barbados</option><option>Belarus</option><option>Belgium</option><option>Belize</option><option>Benin</option><option>Bermuda</option><option>Bhutan</option><option>Bolivia</option><option>Bosnia and Herzegovina</option><option>Botswana</option><option>Brazil</option><option>British Virgin Islands</option><option>Brunei</option><option>Bulgaria</option><option>Burkina Faso</option><option>Burundi</option><option>Cambodia</option><option>Cameroon</option><option>Canada</option><option>Cape Verde</option><option>Cayman Islands</option><option>Central African Republic</option><option>Chad</option><option>Chile</option><option>China</option><option>Colombia</option><option>Comoros</option><option>Cook Islands</option><option>Costa Rica</option><option>Croatia</option><option>Cuba</option><option>Curaçao</option><option>Cyprus</option><option>Czech Republic</option><option>Côte d'Ivoire</option><option>DR Congo</option><option>Denmark</option><option>Djibouti</option><option>Dominica</option><option>Dominican Republic</option><option>Ecuador</option><option>Egypt</option><option>El Salvador</option><option>Equatorial Guinea</option><option>Eritrea</option><option>Estonia</option><option>Eswatini</option><option>Ethiopia</option><option>Falkland Islands</option><option>Faroe Islands</option><option>Fiji</option><option>Finland</option><option>French Guiana</option><option>French Polynesia</option><option>Gabon</option><option>Gambia</option><option>Georgia</option><option>Ghana</option><option>Gibraltar</option><option>Greece</option><option>Greenland</option><option>Grenada</option><option>Guadeloupe</option><option>Guam</option><option>Guatemala</option><option>Guernsey</option><option>Guinea</option><option>Guinea-Bissau</option><option>Guyana</option><option>Haiti</option><option>Honduras</option><option>Hong Kong</option><option>Hungary</option><option>Iceland</option><option>India</option><option>Indonesia</option><option>Iran</option><option>Iraq</option><option>Ireland</option><option>Isle of Man</option><option>Israel</option><option>Jamaica</option><option>Japan</option><option>Jersey</option><option>Jordan</option><option>Kazakhstan</option><option>Kenya</option><option>Kiribati</option><option>Kuwait</option><option>Kyrgyzstan</option><option>Laos</option><option>Latvia</option><option>Lebanon</option><option>Lesotho</option><option>Liberia</option><option>Libya</option><option>Liechtenstein</option><option>Lithuania</option><option>Luxembourg</option><option>Macau</option><option>Madagascar</option><option>Malawi</option><option>Malaysia</option><option>Maldives</option><option>Mali</option><option>Malta</option><option>Marshall Islands</option><option>Martinique</option><option>Mauritania</option><option>Mauritius</option><option>Mayotte</option><option>Mexico</option><option>Micronesia</option><option>Moldova</option><option>Monaco</option><option>Mongolia</option><option>Montenegro</option><option>Montserrat</option><option>Morocco</option><option>Mozambique</option><option>Myanmar</option><option>Namibia</option><option>Nauru</option><option>Nepal</option><option>Netherlands</option><option>New Caledonia</option><option>New Zealand</option><option>Nicaragua</option><option>Niger</option><option>Nigeria</option><option>Niue</option><option>North Korea</option><option>North Macedonia</option><option>Northern Mariana Islands</option><option>Norway</option><option>Oman</option><option>Pakistan</option><option>Palau</option><option>Palestine</option><option>Panama</option><option>Papua New Guinea</option><option>Paraguay</option><option>Peru</option><option>Philippines</option><option>Poland</option><option>Portugal</option><option>Puerto Rico</option><option>Qatar</option><option>Republic of the Congo</option><option>Romania</option><option>Russia</option><option>Rwanda</option><option>Réunion</option><option>Saint Barthélemy</option><option>Saint Helena</option><option>Saint Kitts and Nevis</option><option>Saint Lucia</option><option>Saint Pierre and Miquelon</option><option>Saint Vincent and the Grenadines</option><option>Samoa</option><option>San Marino</option><option>Sao Tome and Principe</option><option>Saudi Arabia</option><option>Senegal</option><option>Serbia</option><option>Seychelles</option><option>Sierra Leone</option><option>Singapore</option><option>Slovakia</option><option>Slovenia</option><option>Solomon Islands</option><option>Somalia</option><option>South Africa</option><option>South Korea</option><option>South Sudan</option><option>Sri Lanka</option><option>Sudan</option><option>Suriname</option><option>Sweden</option><option>Switzerland</option><option>Syria</option><option>Taiwan</option><option>Tajikistan</option><option>Tanzania</option><option>Thailand</option><option>Timor-Leste</option><option>Togo</option><option>Tonga</option><option>Trinidad and Tobago</option><option>Tunisia</option><option>Turkey</option><option>Turkmenistan</option><option>Turks and Caicos Islands</option><option>Tuvalu</option><option>US Virgin Islands</option><option>Uganda</option><option>Ukraine</option><option>United Arab Emirates</option><option>Uruguay</option><option>Uzbekistan</option><option>Vanuatu</option><option>Vatican City</option><option>Venezuela</option><option>Vietnam</option><option>Yemen</option><option>Zambia</option><option>Zimbabwe</option><option>Other</option>
+      </select>
+      <select id="wlHeardFrom" name="heardFrom" required aria-label="Where did you hear about us?">
+        <option value="" disabled selected>Where did you hear about us?</option>
+        <option>Instagram</option><option>TikTok</option><option>LinkedIn</option>
+        <option>Facebook</option><option>A friend</option><option>Other</option>
+      </select>
+      <div class="wl2-hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+      <label class="wl2-consent wl2-full">
+        <input type="checkbox" id="wlConsent" name="consent" required>
+        <span>Yes, email me my GoShopMe early access and launch updates. I can unsubscribe anytime.</span>
+      </label>
+      <p class="wl2-msg wl2-full" id="wlMessage" role="alert"></p>
+      <button class="btn-cta wl2-full" type="submit" id="wlSubmitBtn">
         <span>Claim My Spot</span>
         <span class="btn-circle"><svg viewBox="0 0 20 20" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="10" x2="16" y2="10"></line><polyline points="11,5 16,10 11,15"></polyline></svg></span>
       </button>
+    </form>
+    <p class="waitlist-micro" id="wlMicro" style="margin-top:12px;">No spam. Just early access updates.</p>
+
+    <div class="wl2-done" id="wlDone">
+      <h3>You're on the list</h3>
+      <p>We'll email you as soon as your GoShopMe early access opens.</p>
     </div>
-    <p class="waitlist-micro" id="wlMessage">No spam. Just early access updates.</p>
   </div>
 </section>
 
 <script>
-async function submitWaitlist() {
-  const firstName = document.getElementById('wlFirstName').value.trim();
-  const email = document.getElementById('wlEmail').value.trim();
-  const btn = document.getElementById('wlSubmitBtn');
-  const msg = document.getElementById('wlMessage');
-
-  if (!firstName) {
-    msg.textContent = 'Please enter your first name.';
-    msg.style.color = 'var(--orange)';
-    document.getElementById('wlFirstName').focus();
-    return;
-  }
-  if (!email || !email.includes('@')) {
-    msg.textContent = 'Please enter a valid email address.';
-    msg.style.color = 'var(--orange)';
-    document.getElementById('wlEmail').focus();
-    return;
-  }
-
-  btn.style.opacity = '0.7';
-  btn.style.pointerEvents = 'none';
-  btn.querySelector('span').textContent = 'Sending...';
-  msg.textContent = '';
+/* Waitlist v2: posts each signup to the Supabase waitlist function.
+   UTM tags: taken from this page's own URL, or sent by the parent Wix page as {type:'waitlist-utm', source, medium, campaign}; otherwise left empty. */
+(function () {
+  var form = document.getElementById('waitlistForm');
+  var btn = document.getElementById('wlSubmitBtn');
+  var btnLabel = btn.querySelector('span');
+  var msg = document.getElementById('wlMessage');
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var sourceMap = { instagram: 'Instagram', ig: 'Instagram', tiktok: 'TikTok', linkedin: 'LinkedIn', facebook: 'Facebook', fb: 'Facebook' };
+  var utm = { source: '', medium: '', campaign: '' };
 
   try {
-    const res = await fetch('https://vhxctpaysssqttbdrbec.supabase.co/functions/v1/waitlist', {
+    var q = new URLSearchParams(window.location.search);
+    utm.source = q.get('utm_source') || '';
+    utm.medium = q.get('utm_medium') || '';
+    utm.campaign = q.get('utm_campaign') || '';
+  } catch (e) {}
+
+  window.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'waitlist-utm') {
+      utm.source = d.source || utm.source;
+      utm.medium = d.medium || utm.medium;
+      utm.campaign = d.campaign || utm.campaign;
+      var v = sourceMap[String(utm.source).toLowerCase()];
+      if (v && !form.heardFrom.value) form.heardFrom.value = v;
+    }
+  });
+  try { window.parent.postMessage({ type: 'waitlist-ready' }, '*'); } catch (e) {}
+
+  function busy(b) {
+    btn.style.opacity = b ? '0.7' : '1';
+    btn.style.pointerEvents = b ? 'none' : 'auto';
+    btnLabel.textContent = b ? 'Saving your spot...' : 'Claim My Spot';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.textContent = '';
+    Array.prototype.forEach.call(form.querySelectorAll('.wl2-err'), function (el) { el.classList.remove('wl2-err'); });
+    if (form.website.value) return;
+
+    var bad = [];
+    if (!form.firstName.value.trim()) bad.push(form.firstName);
+    if (!form.lastName.value.trim()) bad.push(form.lastName);
+    if (!emailRe.test(form.email.value.trim())) bad.push(form.email);
+    if (!form.country.value) bad.push(form.country);
+    if (!form.heardFrom.value) bad.push(form.heardFrom);
+    if (bad.length) {
+      bad.forEach(function (el) { el.classList.add('wl2-err'); });
+      bad[0].focus();
+      msg.textContent = 'Please fill in the highlighted fields.';
+      return;
+    }
+    if (!form.consent.checked) { msg.textContent = 'Please tick the box so we can email you your early access.'; return; }
+
+    var firstName = form.firstName.value.trim();
+    busy(true);
+    fetch('https://vhxctpaysssqttbdrbec.supabase.co/functions/v1/waitlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, email, name: firstName, source: 'homepage' })
+      body: JSON.stringify({
+        firstName: firstName,
+        lastName: form.lastName.value.trim(),
+        email: form.email.value.trim(),
+        name: firstName,
+        country: form.country.value,
+        heardFrom: form.heardFrom.value,
+        consent: true,
+        utmSource: utm.source,
+        utmMedium: utm.medium,
+        utmCampaign: utm.campaign,
+        source: 'homepage'
+      })
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Server error');
+      form.style.display = 'none';
+      document.getElementById('wlMicro').style.display = 'none';
+      document.getElementById('wlDone').style.display = 'block';
+    }).catch(function () {
+      busy(false);
+      msg.textContent = 'Something went wrong. Please try again.';
     });
-
-    if (res.ok) {
-      document.getElementById('waitlistForm').style.display = 'none';
-      msg.textContent = "🎉 You're in! Check your inbox for a confirmation from us.";
-      msg.style.color = 'var(--lavender)';
-      msg.style.fontSize = '16px';
-      msg.style.fontWeight = '600';
-      msg.style.textAlign = 'center';
-    } else {
-      throw new Error('Server error');
-    }
-  } catch (err) {
-    btn.style.opacity = '1';
-    btn.style.pointerEvents = 'auto';
-    btn.querySelector('span').textContent = 'Claim My Spot';
-    msg.textContent = 'Something went wrong. Please try again.';
-    msg.style.color = 'var(--orange)';
-  }
-}
+  });
+})();
 </script>
 
 <!-- FOOTER -->
