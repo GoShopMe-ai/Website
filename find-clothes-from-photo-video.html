@@ -789,6 +789,15 @@ footer { background: var(--lavender-bg); padding: clamp(40px, 5vw, 56px) 0 20px;
   .footer-bottom a { margin: 0 8px; }
 }
 </style>
+<script>
+/* Menu links stay on the site the visitor is on (goshopme.us or goshopme.ai). */
+function gsmSite(){
+  var h='';
+  try{var a=window.location.ancestorOrigins; if(a&&a.length){h=a[a.length-1];}}catch(e){}
+  if(!h){try{h=document.referrer||'';}catch(e){}}
+  return /goshopme\.us(\/|:|$)/i.test(h)?'https://www.goshopme.us':'https://www.goshopme.ai';
+}
+</script>
 </head><body>
 
 <div class="mobile-menu" id="mobileMenu">
@@ -1180,9 +1189,9 @@ footer { background: var(--lavender-bg); padding: clamp(40px, 5vw, 56px) 0 20px;
       </div>
       <div class="footer-col">
         <h4>Legal</h4>
-        <a href="privacy-policy.html" onclick="if(window.top!==window.self){window.top.location.href='https://www.goshopme.ai/privacy-policy';return false;}">Privacy Policy</a>
+        <a href="privacy-policy.html" onclick="if(window.top!==window.self){window.top.location.href=gsmSite()+'/privacy-policy';return false;}">Privacy Policy</a>
         <a href="https://www.goshopme.ai/terms" target="_top">Terms &amp; Conditions</a>
-        <a href="privacy-policy.html#cookies-and-similar-technologies" onclick="if(window.top!==window.self){window.top.location.href='https://www.goshopme.ai/privacy-policy';return false;}">Cookie Policy</a>
+        <a href="privacy-policy.html#cookies-and-similar-technologies" onclick="if(window.top!==window.self){window.top.location.href=gsmSite()+'/privacy-policy';return false;}">Cookie Policy</a>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
