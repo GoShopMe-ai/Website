@@ -958,6 +958,13 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
 .compare td:first-child, .compare th:first-child { text-align: left; color: var(--gray-800); }
 .compare td { color: var(--gray-600); }
 .compare .hl { background: var(--lavender-wash); color: var(--black); font-weight: 600; }
+.credits-intro { text-align: center; font-size: 16px; color: var(--gray-600); margin: -12px auto 28px; max-width: 520px; line-height: 1.6; }
+.credit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.credit-item { background: white; border-radius: 16px; padding: 24px 16px; text-align: center; }
+.credit-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: var(--orange); line-height: 1; }
+.credit-what { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-400); margin: 4px 0 10px; }
+.credit-label { font-size: 14px; color: var(--gray-800); line-height: 1.4; }
+@media (max-width: 860px) { .credit-grid { grid-template-columns: repeat(2, 1fr); } }
 .plans-faq { background: white; padding: 64px 0 80px; }
 .plans-faq .container { max-width: 760px; }
 .plans-faq details { border-bottom: 1px solid var(--gray-200); padding: 18px 0; }
@@ -1008,7 +1015,7 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
   <div class="container">
     <div class="plans-label">Plans</div>
     <h1>Shop with ShAI. <span class="accent">Pick the plan that fits you.</span></h1>
-    <p class="plans-sub">Start for free, or get more AI credits with Essential or Premium. Change or cancel anytime.</p>
+    <p class="plans-sub">Every plan includes every ShAI feature. Plans differ only in how many AI credits you get. Change or cancel anytime.</p>
     <div class="billing-switch" role="tablist" aria-label="Billing period">
       <button type="button" data-billing="weekly">Weekly</button>
       <button type="button" data-billing="monthly" class="active">Monthly</button>
@@ -1026,10 +1033,9 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
         <div class="plan-save"></div>
         <div class="plan-credits" data-credits="free">40 AI credits/month</div>
         <ul>
-          <li>Chat with ShAI, your AI personal shopper</li>
-          <li>Search by text, photo, video or live camera</li>
-          <li>Find similar items and budget alternatives</li>
-          <li>Checkout, order tracking and return assistance</li>
+          <li>Everything in GoShopMe, with every ShAI feature</li>
+          <li>40 AI credits every month</li>
+          <li>Good for trying ShAI and occasional shopping</li>
         </ul>
         <a class="plan-btn" href="#" data-go="start">Get started</a>
       </div>
@@ -1039,60 +1045,39 @@ html { -ms-overflow-style: none; scrollbar-width: none; }
         <div class="plan-save" data-save="essential"></div>
         <div class="plan-credits" data-credits="essential"></div>
         <ul>
-          <li>Everything in Free</li>
-          <li>Many more AI credits for searches and outfits</li>
-          <li>Wishlist AI styling and cart optimization</li>
-          <li>Size optimization</li>
+          <li>Everything in GoShopMe, with every ShAI feature</li>
+          <li>More AI credits for regular shopping</li>
+          <li>Change or cancel anytime</li>
         </ul>
         <a class="plan-btn" href="#" data-go="start">Get started</a>
       </div>
       <div class="plan-card featured">
-        <div class="plan-tag">Most complete</div>
+        <div class="plan-tag">Most credits</div>
         <div class="plan-name">Premium</div>
         <div class="plan-price"><span class="amount" data-plan="premium">&mdash;</span><span class="per"></span></div>
         <div class="plan-save" data-save="premium"></div>
         <div class="plan-credits" data-credits="premium"></div>
         <ul>
-          <li>Everything in Essential</li>
-          <li>The most AI credits</li>
-          <li>Outfit feedback and a monthly personal look</li>
-          <li>Exclusive deals, early access and priority support</li>
+          <li>Everything in GoShopMe, with every ShAI feature</li>
+          <li>The most AI credits, for shopping as often as you like</li>
+          <li>Change or cancel anytime</li>
         </ul>
         <a class="plan-btn primary" href="#" data-go="start">Get started</a>
       </div>
     </div>
-    <p class="credit-costs">What a credit buys: Chat 1 &middot; Image 3 &middot; Video / live camera 3 &middot; Outfit 5</p>
+    
   </div>
 </section>
 
 <section class="plans-compare">
   <div class="container">
-    <h2>Compare plans</h2>
-    <div class="compare-wrap">
-      <table class="compare">
-        <thead><tr><th></th><th>Free</th><th>Essential</th><th class="hl">Premium</th></tr></thead>
-        <tbody>
-          <tr><td>ShAI Chat</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>AI credits</td><td>40/month</td><td data-credits-short="essential">see plan</td><td class="hl" data-credits-short="premium">see plan</td></tr>
-          <tr><td>Image Searches</td><td>3 credits</td><td>3 credits</td><td class="hl">3 credits</td></tr>
-          <tr><td>Video Searches</td><td>3 credits</td><td>3 credits</td><td class="hl">3 credits</td></tr>
-          <tr><td>Live Camera</td><td>3 credits</td><td>3 credits</td><td class="hl">3 credits</td></tr>
-          <tr><td>Find Similar</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Budget Alternatives</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Rec. Sets / Request</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Size Optimization</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003; Advanced</td></tr>
-          <tr><td>Wishlist AI Styling</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Cart Optimization</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Checkout Assistance</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Order Tracking</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Return Assistance</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Outfit Feedback</td><td>&mdash;</td><td>&mdash;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Exclusive Deals</td><td>&mdash;</td><td>&mdash;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>Monthly Personal Look</td><td>&mdash;</td><td>&mdash;</td><td class="hl">&#10003; 1/mo</td></tr>
-          <tr><td>Early Access</td><td>&mdash;</td><td>&mdash;</td><td class="hl">&#10003;</td></tr>
-          <tr><td>ShAI Support</td><td>&#10003;</td><td>&#10003;</td><td class="hl">&#10003; Priority</td></tr>
-        </tbody>
-      </table>
+    <h2>How AI credits work</h2>
+    <p class="credits-intro">Everything ShAI does for you uses a few credits. Your credits renew with your plan.</p>
+    <div class="credit-grid">
+      <div class="credit-item"><div class="credit-num">1</div><div class="credit-what">credit</div><div class="credit-label">A chat message with ShAI</div></div>
+      <div class="credit-item"><div class="credit-num">3</div><div class="credit-what">credits</div><div class="credit-label">A search from a photo</div></div>
+      <div class="credit-item"><div class="credit-num">3</div><div class="credit-what">credits</div><div class="credit-label">A search from a video or live camera</div></div>
+      <div class="credit-item"><div class="credit-num">5</div><div class="credit-what">credits</div><div class="credit-label">An outfit put together for you</div></div>
     </div>
   </div>
 </section>
@@ -1222,7 +1207,6 @@ window.addEventListener('resize', sendHeight);
       var a = amount(plan, billing);
       document.querySelector('[data-plan="' + plan + '"]').textContent = a != null ? fmt(a) : '—';
       document.querySelector('[data-credits="' + plan + '"]').textContent = CREDITS[plan][billing];
-      document.querySelector('[data-credits-short="' + plan + '"]').textContent = SHORT[plan][billing];
       var save = '';
       if (billing === 'yearly') {
         var m = amount(plan, 'monthly'), y = amount(plan, 'yearly');
